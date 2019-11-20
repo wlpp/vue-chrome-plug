@@ -1,4 +1,4 @@
-# vue-extends-demo
+# vue-chrome-plug
 
 ## Project setup
 ```
