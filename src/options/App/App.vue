@@ -122,12 +122,7 @@
       </el-table>
     </el-dialog>
     <!-- 随机午餐弹框 -->
-    <el-dialog
-      title="午餐类型"
-      :visible.sync="foodPopup"
-      width="30%"
-      center
-    >
+    <el-dialog title="午餐类型" :visible.sync="foodPopup" width="30%" center>
       <div class="Foolottery_warp">
         <div class="Foolottery" ref="Foolottery">
           <div
@@ -279,15 +274,15 @@ export default {
       }
     },
     autosuggest() {
-      const time = new Date().getHours()
-      if(time>10&&time<11){
+      const time = new Date().getHours();
+      if (time > 10 && time < 11) {
         this.$notify.info({
           title: `该点餐了`,
           dangerouslyUseHTMLString: true,
           duration: 2000,
           showClose: false,
           message:
-            '<a style="color:#67C23A;cursor: pointer;" href="https://h5.waimai.meituan.com/waimai/mindex/home" target="_blank">点击此处去点餐</a>',
+            '<a style="color:#67C23A;cursor: pointer;" href="https://h5.waimai.meituan.com/waimai/mindex/home" target="_blank">点击此处去点餐</a>'
         });
       }
       console.log(time);

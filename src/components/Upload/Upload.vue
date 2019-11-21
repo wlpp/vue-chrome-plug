@@ -37,12 +37,11 @@ export default {
   },
   methods: {
     // 删除
-    handleRemove(file, fileList) {
+    handleRemove(file) {
       this.fileList &&
         this.fileList.map((item, index) => {
-          if (item.name === fileList.name) {
+          if (item.name === file.name) {
             this.fileList.splice(index, 1);
-            item.active = false;
           }
         });
     },
@@ -60,11 +59,9 @@ export default {
           }
           return item;
         });
-
     },
     // 加入文件
     getPicture(file, fileList) {
-      // let lis = document.querySelectorAll('.el-upload-list li')
       this.fileList =
         fileList &&
         fileList.map(item => {
@@ -73,6 +70,7 @@ export default {
             active: false
           };
         });
+        this.fileList[0].active = true
     },
     // 重命名
     rename() {
@@ -113,13 +111,18 @@ export default {
           });
       }
     },
-    // setActive(){
-    //   lis.forEach(item=>{
-    //     var event = new MouseEvent("click");
-    //     item.dispatchEvent(event);
-
-    //   })
-    // }
+    setActive() {
+      let ul = document.querySelector(".el-upload-list ");
+      ul.addEventListener("click", function(e) {
+        ul.children.forEach(item => {
+          item.style.border = "1px solid #c0ccda";
+        });
+        e.target.parentNode.parentNode.style.border = "1px solid #409EFF";
+      });
+    }
+  },
+  mounted() {
+    this.setActive();
   }
 };
 </script>
@@ -132,6 +135,10 @@ export default {
 /deep/ .el-upload-dragger {
   margin: 0 auto;
 }
+/deep/ .el-upload-list{
+  outline: none !important;
+  border:none !important;
+}
 /deep/ .el-upload-list__item .el-icon-close {
   width: 20px;
   height: 20px;
@@ -141,11 +148,41 @@ export default {
 /deep/ .el-upload-list__item {
   cursor: pointer;
   outline: none;
+  padding: 0 !important;
+  line-height: 92px;
+  box-sizing: border-box;
+  position: relative;
+ &:first-of-type{
+    border:1px solid #409EFF;
+  }
+  .el-icon-document {
+    // display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    &::before {
+      content: "";
+    }
+  }
+  img {
+    display: inline-block;
+    float: none !important;
+    vertical-align: middle;
+    margin-left: 20px !important;
+    margin-right: 10px !important;
+  }
 }
+
 /deep/ .el-upload-list__item-name {
   height: 70px;
   line-height: 70px;
+  margin-right: 0;
+  display: inline-block !important;
   margin-top: 0 !important;
+  vertical-align: middle;
 }
 .use_box {
   position: absolute;
